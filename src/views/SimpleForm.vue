@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="form-container">
     <h1>Create an event</h1>
     <form @submit.prevent="sendForm">
       <BaseSelect
@@ -53,7 +53,7 @@
         </div>
       </fieldset>
 
-      <button type="submit">Submit</button>
+      <button class="button" type="submit">Submit</button>
     </form>
   </div>
 </template>

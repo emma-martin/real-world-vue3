@@ -1,7 +1,8 @@
 <template>
   <div id="nav">
     <router-link :to="{ name: 'EventList' }">Events</router-link> |
-    <router-link :to="{ name: 'About' }">About</router-link>|
+    <router-link :to="{ name: 'About' }">About</router-link> |
+    <router-link :to="{ name: 'EventCreate' }">Create an Event</router-link> |
     <router-link :to="{ name: 'SimpleForm' }">Form</router-link>
   </div>
   <router-view />
@@ -92,6 +93,15 @@ strong {
 }
 small {
   font-size: 80%;
+}
+
+fieldset {
+  border: 1px solid transparent;
+}
+
+legend {
+  margin: auto;
+  padding: 0 10px;
 }
 .eyebrow {
   font-size: 20px;
@@ -255,6 +265,7 @@ select:focus::ms-value {
 select::ms-expand {
   opacity: 0;
 }
+
 .field {
   margin-bottom: 24px;
 }
@@ -265,17 +276,16 @@ select::ms-expand {
   color: red;
 }
 .button {
-  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  height: 52px;
+  height: 50px;
   padding: 0 40px;
-  background: transparent;
+  background: linear-gradient(to right, #16c0b0, #84cf6a);
+  color: #ffffff;
   border: none;
   border-radius: 6px;
-  text-align: center;
-  font-weight: 600;
-  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
   transition: all 0.2s linear;
 }
 .button:hover {
@@ -326,5 +336,13 @@ select::ms-expand {
 }
 .button.-icon-center {
   padding: 0 20px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10%;
 }
 </style>

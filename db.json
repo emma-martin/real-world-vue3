@@ -29,6 +29,46 @@
       "date": "July 22, 2022",
       "time": "11:00",
       "organizer": "Carey Wales"
+    },
+    {
+      "id": 7,
+      "category": "nature",
+      "title": "Test",
+      "description": "test",
+      "location": "test",
+      "date": "test",
+      "time": "test",
+      "organizer": "Adam Jaar"
+    },
+    {
+      "id": 8,
+      "category": "housing",
+      "title": "House Repair",
+      "description": "Let's repair a house",
+      "location": "Hill",
+      "date": "28 Aug 21",
+      "time": "10AM",
+      "organizer": "Adam Jaar"
+    },
+    {
+      "id": 13,
+      "category": "food",
+      "title": "Charity meal",
+      "description": "Prepare meals for the community",
+      "location": "Madrid",
+      "date": "2nd Sept 21",
+      "time": "8PM",
+      "organizer": "Adam Jaar"
+    },
+    {
+      "id": 14,
+      "category": "sustainability",
+      "title": "c",
+      "description": "c",
+      "location": "c",
+      "date": "c",
+      "time": "c",
+      "organizer": "Adam Jaar"
     }
   ]
 }

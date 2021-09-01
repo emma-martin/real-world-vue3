@@ -1,6 +1,7 @@
 import axios from 'axios'
 const apiClient = axios.create({
-  baseURL: 'https://my-json-server.typicode.com/emma-martin/real-world-vue3',
+  // baseURL: 'https://my-json-server.typicode.com/emma-martin/real-world-vue3',
+  baseURL: 'http://localhost:3000',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -15,7 +16,7 @@ export default {
   getEvent(id) {
     return apiClient.get('/events/' + id)
   },
-  sendForm(eventCreated) {
-    return apiClient.post('/events', eventCreated)
+  postEvent(event) {
+    return apiClient.post('/events', event)
   },
 }

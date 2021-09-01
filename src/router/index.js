@@ -1,4 +1,6 @@
+import ErrorDisplay from '@/views/ErrorDisplay.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import EventCreate from '../views/EventCreate.vue'
 import EventDetail from '../views/EventDetail.vue'
 import EventList from '../views/EventList.vue'
 import SimpleForm from '../views/SimpleForm.vue'
@@ -29,6 +31,17 @@ const routes = [
     path: '/form',
     name: 'SimpleForm',
     component: SimpleForm,
+  },
+  {
+    path: '/event-create',
+    name: 'EventCreate',
+    component: EventCreate,
+  },
+  {
+    path: '/error/:error',
+    name: 'ErrorDisplay',
+    props: true,
+    component: ErrorDisplay,
   },
 ]
 
