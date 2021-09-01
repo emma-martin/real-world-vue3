@@ -1,48 +1,57 @@
 <template>
   <div>
     <h1>Create an event</h1>
-    <form>
-      <label>Select a category</label>
-      <select v-model="event.category">
-        <option
-          v-for="option in categories"
-          :value="option"
-          :key="option"
-          :selected="option === event.category"
-        >
-          {{ option }}
-        </option>
-      </select>
+    <form @submit.prevent="sendForm">
+      <BaseSelect
+        :options="categories"
+        v-model="event.categories"
+        label="Select a category"
+        error="this input has an error"
+      />
+      <fieldset>
+        <legend>Name & describe your event</legend>
 
-      <h3>Name & describe your event</h3>
+        <BaseInput
+          v-model="event.title"
+          label="Title"
+          type="text"
+          error="this input has an error"
+        />
+        <BaseInput
+          v-model="event.description"
+          label="Description"
+          type="text"
+        />
+      </fieldset>
 
-      <BaseInput v-model="event.title" label="Title" type="text" />
-      <BaseInput v-model="event.description" label="Description" type="text" />
+      <fieldset>
+        <legend>Where is your event?</legend>
+        <BaseInput v-model="event.location" label="Location" type="text" />
+      </fieldset>
 
-      <h3>Where is your event?</h3>
-      <BaseInput v-model="event.location" label="Location" type="text" />
+      <fieldset>
+        <legend>Pets</legend>
+        <p>Are pets allowed?</p>
+        <div>
+          <BaseRadioGroup
+            v-model="event.pets"
+            :options="petOptions"
+            name="pets"
+            vertical
+          />
+        </div>
+      </fieldset>
 
-      <h3>Are pets allowed?</h3>
-      <div>
-        <input type="radio" v-model="event.pets" :value="1" name="pets" />
-        <label>Yes</label>
-      </div>
+      <fieldset>
+        <legend>Extras</legend>
+        <div>
+          <BaseCheckbox v-model="event.extras.catering" label="Catering" />
+        </div>
 
-      <div>
-        <input type="radio" v-model="event.pets" :value="0" name="pets" />
-        <label>No</label>
-      </div>
-
-      <h3>Extras</h3>
-      <div>
-        <input type="checkbox" v-model="event.extras.catering" class="field" />
-        <label>Catering</label>
-      </div>
-
-      <div>
-        <input type="checkbox" v-model="event.extras.music" class="field" />
-        <label>Live music</label>
-      </div>
+        <div>
+          <BaseCheckbox v-model="event.extras.music" label="Live music" />
+        </div>
+      </fieldset>
 
       <button type="submit">Submit</button>
     </form>
@@ -50,6 +59,7 @@
 </template>
 
 <script>
+import FormService from '@/services/FormService.js'
 export default {
   data() {
     return {
@@ -73,7 +83,35 @@ export default {
           music: false,
         },
       },
+      petOptions: [
+        { label: 'Yes', value: 1 },
+        { label: 'No', value: 0 },
+      ],
     }
+  },
+  methods: {
+    sendForm() {
+      FormService.postForm(this.event)
+        .then(function (response) {
+          console.log('Response', response)
+        })
+        .catch(function (err) {
+          console.log('Error', err)
+        })
+    },
   },
 }
 </script>
+<style scoped>
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+</style>

@@ -1,17 +1,14 @@
 <template>
-  <div>
-    <label :for="uuid">{{ label }}</label>
-    <input
-      :placeholder="label"
-      class="field"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
-      v-bind="$attrs"
-      :id="uuid"
-      :aria-describedby="error ? `${uuid}-error` : null"
-      :aria-invalid="error ? true : null"
-    />
-  </div>
+  <input
+    type="checkbox"
+    :checked="modelValue"
+    @change="$emit('update:modelValue', $event.target.checked)"
+    class="field"
+    :id="uuid"
+    :aria-describedby="error ? `${uuid}-error` : null"
+    :aria-invalid="error ? true : null"
+  />
+  <label v-if="label" :for="uuid">{{ label }}</label>
   <p
     v-if="error"
     class="errorMessage"
@@ -24,16 +21,16 @@
 
 <script>
 import UniqueID from '../composables/UniqueID'
+
 export default {
-  inheritAttrs: false,
   props: {
     label: {
       type: String,
       default: '',
     },
     modelValue: {
-      type: [String, Number],
-      default: '',
+      type: Boolean,
+      default: false,
     },
     error: {
       type: String,
