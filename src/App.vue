@@ -1,4 +1,7 @@
 <template>
+  <div id="flashMessage" v-if="GlobalStore.flashMessage">
+    {{ GlobalStore.flashMessage }}
+  </div>
   <div id="nav">
     <router-link :to="{ name: 'EventList' }">Events</router-link> |
     <router-link :to="{ name: 'About' }">About</router-link> |
@@ -7,8 +10,26 @@
   </div>
   <router-view />
 </template>
-
+<script>
+export default {
+  inject: ['GlobalStore'],
+}
+</script>
 <style>
+@keyframes yellowfade {
+  from {
+    background: yellow;
+  }
+  to {
+    background: transparent;
+  }
+}
+
+#flashMessage {
+  animation-name: yellowfade;
+  animation-duration: 3s;
+}
+
 #nav {
   padding: 30px;
 }
@@ -59,8 +80,6 @@ h3,
 h4,
 h5,
 h6 {
-  display: flex;
-  align-items: center;
   font-family: 'Montserrat', sans-serif;
 }
 h1 {

@@ -1,9 +1,14 @@
 import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
-import { createApp } from 'vue'
+import 'nprogress/nprogress.css'
+import { createApp, reactive } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
+const GlobalStore = reactive({
+  flashMessage: '',
+})
 
 const requireComponent = require.context(
   './components',
@@ -23,4 +28,4 @@ requireComponent.keys().forEach((fileName) => {
   app.component(componentName, componentConfig.default || componentConfig)
 })
 
-app.use(store).use(router).mount('#app')
+app.use(store).use(router).provide('GlobalStore', GlobalStore).mount('#app')

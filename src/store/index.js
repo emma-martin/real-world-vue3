@@ -6,6 +6,7 @@ export default createStore({
     user: 'Adam Jaar',
     events: [],
     event: {},
+    totalEvents: 0,
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -16,6 +17,12 @@ export default createStore({
     },
     SET_EVENT(state, event) {
       state.event = event
+    },
+    CLEAR_EVENTS(state) {
+      state.events = null
+    },
+    SET_TOTAL_EVENTS(state, totalEvents) {
+      state.totalEvents = totalEvents
     },
   },
   actions: {
@@ -29,16 +36,20 @@ export default createStore({
         })
     },
     fetchEvents({ commit }) {
-      return EventService.getEvents()
+      commit('CLEAR_EVENTS')
+      return EventService.getEvents(...arguments)
         .then((response) => {
           commit('SET_EVENTS', response.data)
+          commit('SET_TOTAL_EVENTS', response.headers['x-total-count'])
         })
         .catch((error) => {
           throw error
         })
     },
     fetchEvent({ commit, state }, id) {
-      const existingEvent = state.events.find((event) => event.id === id)
+      const existingEvent = state.events.find(
+        (event) => event.id === Number(id)
+      )
       if (existingEvent) {
         commit('SET_EVENT', existingEvent)
       } else {
